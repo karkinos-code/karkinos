@@ -1,0 +1,33 @@
+name: Deploy MkDocs documentation to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:      # Adds a "Run workflow" button for manual runs
+
+permissions:
+  contents: write         # Job pushes to gh-pages branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Fetch the full history for gh-pages branch to update
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history
+
+      # Run process to check MkDocs compilation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install MkDocs
+        run: pip install "mkdocs<2"
+
+      - name: Configure git identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Build and deploy
+        run: mkdocs gh-deploy --force
