@@ -6,9 +6,12 @@ repo_url: https://github.com/leahghartman/karkinos
 
 nav:
   - Home: index.md
+  - Installation: installation.md
+  - Usage: usage.md
+  - Code Reference: reference/
 
 theme:
-  name: mkdocs
+  name: simplex # mkdocs (default)
   locale: en
   include_sidebar: true
   color_mode: auto
@@ -19,4 +22,15 @@ theme:
     - rust
     - toml
 
+plugins:
+  - search
+  - gen-files:
+      scripts:
+        - scripts/gen_ref_pages.py
+  - literate-nav:
+      nav_file: SUMMARY.md
+  - mkdogstrings:
+      handlers:
+          python:
+              paths: [src]        # Same folder as in the script
 

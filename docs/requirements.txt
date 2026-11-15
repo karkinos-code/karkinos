@@ -1,0 +1,4 @@
+mkdocs<2
+mkdocs-bootswatch
+mkdocstrings[python]
+mkdocs-gen-files
