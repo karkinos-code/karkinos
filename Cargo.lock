@@ -5,39 +5,81 @@ version = 4
 [[package]]
 name = "karkinos"
 version = "0.1.0"
+dependencies = [
+ "karkinos-beam",
+ "karkinos-core",
+ "karkinos-integrators",
+ "karkinos-io",
+ "karkinos-medium",
+ "karkinos-optics",
+ "karkinos-radiation",
+ "karkinos-sim",
+]
 
 [[package]]
 name = "karkinos-beam"
 version = "0.1.0"
+dependencies = [
+ "karkinos-core",
+]
 
 [[package]]
 name = "karkinos-cli"
 version = "0.1.0"
+dependencies = [
+ "karkinos",
+]
 
 [[package]]
 name = "karkinos-core"
 version = "0.1.0"
 
 [[package]]
+name = "karkinos-integrators"
+version = "0.1.0"
+dependencies = [
+ "karkinos-core",
+]
+
+[[package]]
 name = "karkinos-io"
 version = "0.1.0"
+dependencies = [
+ "karkinos-beam",
+ "karkinos-core",
+]
 
 [[package]]
 name = "karkinos-medium"
 version = "0.1.0"
+dependencies = [
+ "karkinos-core",
+]
 
 [[package]]
 name = "karkinos-optics"
 version = "0.1.0"
-
-[[package]]
-name = "karkinos-push"
-version = "0.1.0"
+dependencies = [
+ "karkinos-core",
+]
 
 [[package]]
 name = "karkinos-py"
 version = "0.1.0"
+dependencies = [
+ "karkinos",
+]
 
 [[package]]
 name = "karkinos-radiation"
 version = "0.1.0"
+dependencies = [
+ "karkinos-core",
+]
+
+[[package]]
+name = "karkinos-sim"
+version = "0.1.0"
+dependencies = [
+ "karkinos-core",
+]
