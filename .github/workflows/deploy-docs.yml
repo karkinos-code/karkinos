@@ -9,7 +9,7 @@ on:
       - 'properdocs.yml'
   pull_request:
     paths:
-      - - '.github/workflows/deploy-docs.yml'
+      - '.github/workflows/deploy-docs.yml'
       - 'docs/**'
       - 'properdocs.yml'
   workflow_dispatch:      # Adds a "Run workflow" button for manual runs
