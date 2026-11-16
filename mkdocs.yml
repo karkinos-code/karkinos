@@ -8,10 +8,10 @@ nav:
   - Home: index.md
   - Installation: installation.md
   - Usage: usage.md
-  - Code Reference: reference/
+  #- Code Reference: reference/
 
 theme:
-  name: simplex # mkdocs (default)
+  name: simplex
   locale: en
   include_sidebar: true
   color_mode: auto
