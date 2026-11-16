@@ -6,18 +6,18 @@ on:
     paths:
       - '.github/workflows/deploy-docs.yml'
       - 'docs/**'
-      - 'mkdocs.yml'
+      - 'properdocs.yml'
   pull_request:
     paths:
+      - - '.github/workflows/deploy-docs.yml'
       - 'docs/**'
-      - 'mkdocs.yml'
-      - '.github/workflows/deploy-docs.yml'
+      - 'properdocs.yml'
   workflow_dispatch:      # Adds a "Run workflow" button for manual runs
 
 concurrency:
   group: docs-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
-  
+ 
 permissions:
   contents: write         # Job pushes to gh-pages branch
 
@@ -37,11 +37,11 @@ jobs:
           cache: 'pip'
           cache-dependency-path: 'docs/requirements.txt'
 
-      - name: Install MkDocs and Themes
+      - name: Install ProperDocs and theme
         run: pip install -r docs/requirements.txt
 
       - name: Check that the docs build
-        run: mkdocs build --strict
+        run: properdocs build --strict
 
       - name: Configure Git identity and credentials
         if: github.event_name != 'pull_request'
@@ -51,4 +51,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         if: github.event_name != 'pull_request'
-        run: mkdocs gh-deploy --force
+        run: properdocs gh-deploy --force
