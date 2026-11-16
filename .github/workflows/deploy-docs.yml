@@ -1,17 +1,23 @@
-name: Deploy MkDocs documentation to GitHub Pages
+name: Deploy MkDocs documentation
 
 on:
   push:
     branches: [main]
     paths:
+      - '.github/workflows/deploy-docs.yml'
       - 'docs/**'
       - 'mkdocs.yml'
-      - '.github/workflows/deploy_docs.yml'
-      - 'requirements.txt'
-
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/deploy-docs.yml'
   workflow_dispatch:      # Adds a "Run workflow" button for manual runs
-  
 
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
 permissions:
   contents: write         # Job pushes to gh-pages branch
 
@@ -19,25 +25,30 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # Fetch the full history for gh-pages branch to update
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v5
         with:
-          fetch-depth: 0  # Fetch full history
+          fetch-depth: 0
 
-      # Run process to check MkDocs compilation
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: 'pip'    # Auto cache requirements.txt dependencies
+          cache: 'pip'
           cache-dependency-path: 'docs/requirements.txt'
 
       - name: Install MkDocs and Themes
         run: pip install -r docs/requirements.txt
 
+      - name: Check that the docs build
+        run: mkdocs build --strict
+
       - name: Configure Git identity and credentials
+        if: github.event_name != 'pull_request'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Build and deploy
+      - name: Deploy to GitHub Pages
+        if: github.event_name != 'pull_request'
         run: mkdocs gh-deploy --force

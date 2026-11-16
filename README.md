@@ -9,7 +9,7 @@
 [![Build](https://github.com/karkinos-code/karkinos/actions/workflows/build.yml/badge.svg)](https://github.com/karkinos-code/karkinos/actions/workflows/build.yml)
 [![Tests](https://github.com/karkinos-code/karkinos/actions/workflows/tests.yml/badge.svg)](https://github.com/karkinos-code/karkinos/actions/workflows/tests.yml)
 [![Linting and Formatting](https://github.com/karkinos-code/karkinos/actions/workflows/lint.yml/badge.svg)](https://github.com/karkinos-code/karkinos/actions/workflows/lint.yml)
-[![Coverage](https://github.com/karkinos-code/karkinos/actions/workflows/coverage.yml/badge.svg)](https://github.com/karkinos-code/karkinos/actions/workflows/coverage.yml)
+[![Coverage](https://img.shields.io/codecov/c/github/karkinos-code/karkinos?label=Coverage)](https://codecov.io/gh/karkinos-code/karkinos)
 [![Docs](https://github.com/karkinos-code/karkinos/actions/workflows/deploy-docs.yml/badge.svg)](https://karkinos-code.github.io/karkinos/)
 
 </div>
