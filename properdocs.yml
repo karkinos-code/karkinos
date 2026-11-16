@@ -1,11 +1,40 @@
 site_name: Karkinos
 site_url: https://karkinos-code.github.io/karkinos/
 repo_url: https://github.com/karkinos-code/karkinos
+edit_uri: ""
 
 nav:
   - Home: index.md
-  - Installation: installation.md
-  - Usage: usage.md
+  - Guide:
+      - Installation: guide/installation.md
+      - Quick Start: guide/quickstart.md
+      - Input Deck: guide/input-deck.md
+      - Species: guide/species.md
+      - Media: guide/media.md
+      - Integrators: guide/integrators.md
+      - Diagnostics: guide/diagnostics.md
+      - Output: guide/output.md
+      - Examples: guide/examples.md
+  - Theory:
+      - Units and Normalization: theory/units.md
+      - Coordinates and Frames: theory/frames.md
+      - Charged-Particle Dynamics: theory/charged-particles.md
+      - Plasma Wakefields: theory/wakefields.md
+      - Beam Physics: theory/beam-physics.md
+      - Time Integration: theory/integrators.md
+      - Photon Ray Tracing: theory/ray-tracing.md
+      - Radiation: theory/radiation.md
+      - References: theory/references.md
+  - Validation:
+      - Overview: validation/index.md
+      - Integrator Convergence: validation/integrator-convergence.md
+      - Betatron Orbit: validation/betatron-orbit.md
+  - Develop:
+      - Architecture: develop/architecture.md
+      - Contributing: develop/contributing.md
+      - Adding Components: develop/adding-components.md
+      - Testing: develop/testing.md
+      - Writing Docs: develop/docs.md
 
 theme:
   name: cinder
@@ -16,3 +45,18 @@ theme:
 
 plugins:
   - search
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+
+extra_javascript:
+  - assets/javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js
+  - assets/javascripts/mermaid-init.js
