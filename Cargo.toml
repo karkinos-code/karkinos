@@ -14,6 +14,18 @@ documentation = "https://karkinos-code.github.io/karkinos/"
 readme        = "README.md"
 
 [workspace.dependencies]
+# Internal crates
+karkinos             = { path = "crates/karkinos",             version = "0.1.0" }
+karkinos-core        = { path = "crates/karkinos-core",        version = "0.1.0" }
+karkinos-medium      = { path = "crates/karkinos-medium",      version = "0.1.0" }
+karkinos-beam        = { path = "crates/karkinos-beam",        version = "0.1.0" }
+karkinos-integrators = { path = "crates/karkinos-integrators", version = "0.1.0" }
+karkinos-optics      = { path = "crates/karkinos-optics",      version = "0.1.0" }
+karkinos-radiation   = { path = "crates/karkinos-radiation",   version = "0.1.0" }
+karkinos-io          = { path = "crates/karkinos-io",          version = "0.1.0" }
+karkinos-sim         = { path = "crates/karkinos-sim",         version = "0.1.0" }
+
+# External crates
 rayon = "1"
 toml  = "0.9"
 serde = { version = "1.0", features = ["derive"] }
