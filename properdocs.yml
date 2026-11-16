@@ -1,0 +1,18 @@
+site_name: Karkinos
+site_url: https://karkinos-code.github.io/karkinos/
+repo_url: https://github.com/karkinos-code/karkinos
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Usage: usage.md
+
+theme:
+  name: cinder
+  highlightjs: true
+  hljs_languages:
+    - rust
+    - toml
+
+plugins:
+  - search
