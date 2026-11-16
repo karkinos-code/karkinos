@@ -3,23 +3,39 @@ resolver = "3"
 members = ["crates/*"]
 
 [workspace.package]
-version      = "0.1.0"
-edition      = "2024"
-rust-version = "1.85" 
-license      = "MIT"
-authors      = ["Leah Hartman", "Yasmina Elmore", "Janice Zou", "Zahraa Noureddine"] 
-repository   = "https://github.com/leahghartman/karkinos"
-
+version       = "0.1.0"
+edition       = "2024"
+rust-version  = "1.85" 
+license       = "MIT"
+authors       = ["Yasmina Elmore", "Leah Hartman", "Zahraa Noureddine", "Janice Zou"] 
+repository    = "https://github.com/karkinos-code/karkinos"
+homepage      = "https://github.com/karkinos-code"
+documentation = "https://karkinos-code.github.io/karkinos/"
+readme        = "README.md"
 
 [workspace.dependencies]
 rayon = "1"
-toml  = "0.8"
+toml  = "0.9"
 serde = { version = "1.0", features = ["derive"] }
 
-# Internal crates
-
 [workspace.lints.rust]
+unsafe_code  = "warn"
+missing_docs = "warn"
 
 [workspace.lints.clippy]
+pedantic               = { level = "warn", priority = -1 }
+many_single_char_names = "allow"
+similar_names          = "allow"
 
+[profile.release]
+lto           = "thin"
+codegen-units = 1
+strip         = "symbols"
 
+[profile.profiling]
+inherits = "release"
+debug    = "line-tables-only"
+strip    = false
+
+[profile.dev.package."*"]
+opt-level = 2
