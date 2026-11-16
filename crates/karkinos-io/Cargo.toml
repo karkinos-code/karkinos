@@ -3,7 +3,18 @@ name = "karkinos-io"
 description = "something"
 
 # Inherit everything else from the root workspace
-version = { workspace = true }
-edition = { workspace = true }
+version       = { workspace = true }
+edition       = { workspace = true }
+rust-version  = { workspace = true }
+license       = { workspace = true }
+authors       = { workspace = true }
+repository    = { workspace = true }
+homepage      = { workspace = true }
+documentation = { workspace = true }
+
+[lints]
+workspace = true
 
 [dependencies]
+karkinos-core = { workspace = true }
+karkinos-beam = { workspace = true }

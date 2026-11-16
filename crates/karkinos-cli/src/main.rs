@@ -1,3 +1,3 @@
-fn main() {
-    println!("Hello, world!");
-}
+//! Command-line interface for Karkinos.
+
+fn main() {}
