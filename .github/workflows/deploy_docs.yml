@@ -1,0 +1,44 @@
+name: Deploy MkDocs documentation to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/deploy_docs.yml'
+      - 'requirements.txt'
+
+  workflow_dispatch:      # Adds a "Run workflow" button for manual runs
+  
+
+permissions:
+  contents: write         # Job pushes to gh-pages branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Fetch the full history for gh-pages branch to update
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history
+
+      # Run process to check MkDocs compilation
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: 'pip'    # Auto cache requirements.txt dependencies
+          cache-dependency-path: 'docs/requirements.txt'
+
+      - name: Install MkDocs and Themes
+        #run: pip install "mkdocs<2"
+        run: pip install -r docs/requirements.txt
+
+      - name: Configure Git identity and credentials
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Build and deploy
+        run: mkdocs gh-deploy --force
