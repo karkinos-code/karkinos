@@ -32,7 +32,6 @@ jobs:
           cache-dependency-path: 'docs/requirements.txt'
 
       - name: Install MkDocs and Themes
-        #run: pip install "mkdocs<2"
         run: pip install -r docs/requirements.txt
 
       - name: Configure Git identity and credentials

@@ -1,30 +1,38 @@
 name: Linting and Formatting
 
-# When a push to main is attempted, or any type of PR is performed, this CI
-# file should run.
 on:
   push:
-    branches: [main]
+    branches: [main, 'karkinos-*']
   pull_request:
 
-# Specifies the environment variables for cargo to use.
-# For example, always turn cargo text colors on and change warnings to errors.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   CARGO_TERM_COLOR: always
-  RUSTFLAGS: -D warnings
 
-# Start of jobs to run
 jobs:
-
-  # Checks linting and formatting using rustfmt and clippy
   lint:
-    name: linting and formatting
+    name: Linting and Formatting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5            # Checks out the respository
-      - uses: dtolnay/rust-toolchain@stable  # Installs Rust...
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
         with:
-          components: rustfmt, clippy        # ...with rustfmt and clippy
-      - uses: Swatinem/rust-cache@v2         # Puts dependencies in cache for next run
-      - run: cargo fmt --all -- --check
-      - run: cargo clippy --all-targets --all-features
+          components: rustfmt, clippy
+
+      - name: Cache Cargo dependencies
+        uses: Swatinem/rust-cache@v2
+
+      - name: Check code formatting (rustfmt)
+        run: cargo fmt --all -- --check
+
+      - name: Run linter (clippy)
+        run: cargo clippy --all-targets --all-features -- -D warnings
